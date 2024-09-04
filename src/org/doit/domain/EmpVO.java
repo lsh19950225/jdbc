@@ -3,6 +3,7 @@ package org.doit.domain;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class EmpVO {
 
 	private int empno;
@@ -20,7 +22,7 @@ public class EmpVO {
 	private String job;
 	private int mgr;
 	private LocalDateTime hiredate;
-	private double sal;
+	private double sal; // pay
 	private double comm;
 	private int deptno;
 
