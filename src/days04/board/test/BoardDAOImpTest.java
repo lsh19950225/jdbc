@@ -60,5 +60,20 @@ class BoardDAOImpTest { // 단위 테스트
 		}
 		
 	}
+	
+	@Test
+	void testSearch() {
+		
+		try {
+			// ArrayList<BoardDTO> list = this.dao.search("w", "홍길동1");
+			ArrayList<BoardDTO> list = this.dao.search("w", "홍길동1", 2, 5);
+			list.forEach(dto->{
+				System.out.println(dto);
+			});
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 } // class

@@ -31,5 +31,14 @@ public interface BoardDAO {
 	
 	// 5. 게시글 수정 - 제목, 내용, 이메일
 	int update(BoardDTO dto) throws SQLException;
+	
+	// 6. 게시글 검색 페이징처리 x
+	ArrayList<BoardDTO> search(String searchCondition, String searchWord) throws SQLException;
+
+	// 6-1. 게시글 검색 페이징처리 o
+	ArrayList<BoardDTO> search(String searchCondition, String searchWord, int currentPage, int numberPerPage) throws SQLException;
+	
+	// 검색할 때의 총 페이지
+	int getTotalPages(int numberPerPage, String searchCondition, String searchWord) throws SQLException;
 
 } // interface

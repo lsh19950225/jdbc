@@ -118,7 +118,36 @@ public class BoardService {
 		return rowCount;
 	}
 	
-
-	
+	// 5. 게시글 검색 서비스
+	public ArrayList<BoardDTO> searchService(String searchCondition, String searchWord, int currentPage, int numberPerPage){
+		
+		ArrayList<BoardDTO> list = null;
+		// 1. DB 연동 list
+		try {
+			((BoardDAOImpl)this.dao).getConn().setAutoCommit(false);
+			list = this.dao.search(searchCondition, searchWord, currentPage, numberPerPage);
+			// 2. 로그 기록 작업
+			System.out.println("> 게시글 검색 : 로그 기록 작업...");
+			// 3. 문자/메일 전송
+			System.out.println("> 게시글 검색 : 문자/메일 전송 작업...");
+			((BoardDAOImpl)this.dao).getConn().commit();
+		} catch (SQLException e) {
+			try {
+				((BoardDAOImpl)this.dao).getConn().rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				((BoardDAOImpl)this.dao).getConn().setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+		
+	}
 
 } // class
